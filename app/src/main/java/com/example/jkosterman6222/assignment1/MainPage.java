@@ -18,6 +18,15 @@ public class MainPage extends AppCompatActivity {
             Intent intent = new Intent(this, ImagePreviewPage.class);
             startActivity(intent);
         }
+
+    public void UserPreferences(View view) {
+
+            Intent intent = new Intent(this, UserPreferences.class);
+            startActivity(intent);
+        }
+
     }
+
+
 
 

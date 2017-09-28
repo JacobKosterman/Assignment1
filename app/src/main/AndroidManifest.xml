@@ -22,7 +22,8 @@
 
         <uses-feature android:name="android.hardware.camera" />
 
-        <activity android:name=".ImagePreviewPage"></activity>
+        <activity android:name=".ImagePreviewPage" />
+        <activity android:name=".UserPreferences"></activity>
     </application>
 
 </manifest>
