@@ -1,7 +1,10 @@
 package com.example.jkosterman6222.assignment1;
 
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -13,7 +16,7 @@ public class LoginScreen extends AppCompatActivity {
         setContentView(R.layout.activity_login_screen);
     }
 
-    public void authenticate() {
+    public void authenticate(View view) {
         EditText userName;
         EditText passWord;
 
@@ -30,11 +33,20 @@ public class LoginScreen extends AppCompatActivity {
 
             if (userName.getText().toString().toUpperCase().equals(savedUserName.toUpperCase()) && passWord.getText().toString().equals(savedPassword.toUpperCase())){
 
-                
+                Intent intent = new Intent(this, MainPage.class);
+                startActivity(intent);
 
+            }else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Please fill out valid Username and Password");
+                builder.setTitle("Login Error");
+                AlertDialog dialog = builder.create();
+                builder.create().show();
+                userName.setText("");
+                passWord.setText("");
 
+            };
 
-            }
         }
     }
 }
