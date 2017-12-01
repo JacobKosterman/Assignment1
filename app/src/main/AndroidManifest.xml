@@ -9,20 +9,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginScreen" android:label="Login">
+        <activity
+            android:name=".LoginScreen"
+            android:label="Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainPage" android:label="Home"></activity>
+        <activity
+            android:name=".MainPage"
+            android:label="Home" />
 
         <uses-permission android:name="android.permission.CAMERA" />
+
         <uses-feature android:name="android.hardware.camera" />
 
-        <activity android:name=".ImagePreviewPage" android:label="Picture Preview"></activity>
-        <activity android:name=".UserPreferences" android:label="Preferences"></activity>
+        <activity
+            android:name=".ImagePreviewPage"
+            android:label="Picture Preview" />
+        <activity
+            android:name=".UserPreferences"
+            android:label="Preferences" />
+        <activity android:name=".UserCreation"></activity>
     </application>
 
 </manifest>
