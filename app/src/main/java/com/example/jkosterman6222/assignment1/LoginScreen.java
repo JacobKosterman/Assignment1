@@ -36,11 +36,11 @@ public class LoginScreen extends AppCompatActivity {
         // add some data
         List<User> users = database.userDao().getAllUser();
         if (users.size()==0) {
-            database.userDao().addUser(new User(1, "Test 1", 1));
+            database.userDao().addUser(new User(1, "Test 1", "test1"));
             user = database.userDao().getAllUser().get(0);
             Toast.makeText(this, String.valueOf(user.id), Toast.LENGTH_SHORT).show();
-            database.userDao().addUser(new User(2, "Test 2", 2));
-            database.userDao().addUser(new User(3, "Test 3", 3));
+            database.userDao().addUser(new User(2, "Test 2", "test2"));
+            database.userDao().addUser(new User(3, "Test 3", "test3"));
         }
     }
 
