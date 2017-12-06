@@ -4,17 +4,18 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity
-public class User {
+public class Toast {
 
     @PrimaryKey(autoGenerate = true)
     public final int id;
-    public String userName;
-    public String password;
+    public String name;
+    public String comment;
 
-    public User(int id, String userName, String password) {
+    public Toast(int id, String name, String comment) {
         this.id = id;
-        this.userName = userName;
-        this.password = password;
+        this.name = name;
+        this.comment = comment;
+
     }
 
 }

@@ -1,7 +1,5 @@
 package com.example.jkosterman6222.assignment1;
 
-
-
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
@@ -12,20 +10,17 @@ import java.util.List;
 
 
 @Dao
-public interface UserDao {
-
+public interface PreferencesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void addUser(User user);
+    void addPreferences(Preferences preferences);
 
-    @Query("select * from user")
-    public List<User> getAllUser();
-
-    @Query("select * from user where id = :userId")
-    public List<User> getUser(long userId);
+    @Query("SELECT * FROM preferences WHERE userId=:userId")
+    List<Preferences> findPreferencesForUser(int userId);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    void updateUser(User user);
+    void updatePreferences(Preferences preferences);
 
-    @Query("delete from user")
-    void removeAllUsers();
+    @Query("delete from preferences where id = :id")
+    void delete(long id);
+
 }

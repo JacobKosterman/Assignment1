@@ -27,23 +27,58 @@ public class LoginScreen extends AppCompatActivity {
         Stetho.initializeWithDefaults(this);
         setContentView(R.layout.activity_login_screen);
 
-
-
-
         database = AppDatabase.getDatabase(getApplicationContext());
 
         database.userDao().removeAllUsers();
         // add some data
         List<User> users = database.userDao().getAllUser();
         if (users.size()==0) {
-            database.userDao().addUser(new User(1, "Test 1", "test1"));
+            database.userDao().addUser(new User(1, "JacKos", "test"));
             user = database.userDao().getAllUser().get(0);
             Toast.makeText(this, String.valueOf(user.id), Toast.LENGTH_SHORT).show();
-            database.userDao().addUser(new User(2, "Test 2", "test2"));
-            database.userDao().addUser(new User(3, "Test 3", "test3"));
+            Preferences preferences = new Preferences(user.id, "test@email.com", Boolean.TRUE);
+            database.preferencesDao().addPreferences(preferences);
+            database.userDao().addUser(new User(2, "Newman", "test"));
+            database.userDao().addUser(new User(3, "Metzen", "test"));
         }
+
+        updateFirstUserData();
+    }
+    private void updateFirstUserData() {
+        List<User> user = database.userDao().getAllUser();
+        List<Preferences> preferencesForUser = database.preferencesDao().findPreferencesForUser(user.get(0).id);
+        //TextView textView = findViewById(R.id.result);
+        Toast.makeText(this, preferencesForUser.toString(), Toast.LENGTH_SHORT).show();
+       /* if (user.size()>0){
+            textView.setText(user.get(0).name + " Skill points " + user.get(0).skillPoints + " Trophys " + trophiesForUser.size() );
+        }*/
     }
 
+    public void onClick(View view){
+        /*if (view.getId()==R.id.addtrophybutton) {
+            // TODO add trophy
+            // TODO call updatefirstUserData
+            Toast.makeText(this,String.valueOf(user.id), Toast.LENGTH_SHORT).show();
+           //database.trophyDao().addTrophy(trophy);
+        }
+        if (view.getId()==R.id.increaseskills ){
+            user.skillPoints++;
+            database.userDao().updateUser(user);
+            // TODO to skillpoints
+
+        }
+        // TODO call updatefirstUserData
+        //updateFirstUserData();*/
+
+    }
+    @Override
+    protected void onDestroy() {
+        AppDatabase.destroyInstance();
+        super.onDestroy();
+    }
+
+
+    //Authenticate is dated and will be removed
     public void authenticate(View view) {
         EditText userName;
         EditText passWord;
@@ -79,28 +114,6 @@ public class LoginScreen extends AppCompatActivity {
     }
 
 
-        public void onClick(View view){
-           /* if (view.getId()==R.id.addtrophybutton) {
-                // TODO add trophy
-                // TODO call updatefirstUserData
-                Toast.makeText(this,String.valueOf(user.id), Toast.LENGTH_SHORT).show();
-               //database.trophyDao().addTrophy(trophy);
-            }*/
-           /* if (view.getId()==R.id.increaseskills ){
-                user.skillPoints++;
-                database.userDao().updateUser(user);
-                // TODO to skillpoints
-
-            }*/
-            // TODO call updatefirstUserData
-            //updateFirstUserData();
-
-        }
-        @Override
-        protected void onDestroy() {
-            AppDatabase.destroyInstance();
-            super.onDestroy();
-        }
-    }
+}
 
 
