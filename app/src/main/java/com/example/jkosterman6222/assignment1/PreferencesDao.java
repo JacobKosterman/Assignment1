@@ -17,7 +17,7 @@ public interface PreferencesDao {
     @Query("SELECT * FROM preferences WHERE userId=:userId")
     List<Preferences> findPreferencesForUser(int userId);
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
+     @Update(onConflict = OnConflictStrategy.REPLACE)
     void updatePreferences(Preferences preferences);
 
     @Query("delete from preferences where id = :id")

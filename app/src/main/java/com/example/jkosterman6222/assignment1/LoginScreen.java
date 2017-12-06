@@ -42,6 +42,13 @@ public class LoginScreen extends AppCompatActivity {
             database.userDao().addUser(new User(3, "Metzen", "test"));
         }
 
+        try{
+            database.toastDao().getToast(1);
+        }
+        catch (Exception e){
+
+        }
+
         updateFirstUserData();
     }
     private void updateFirstUserData() {
