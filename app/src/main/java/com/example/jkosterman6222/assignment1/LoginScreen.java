@@ -121,6 +121,13 @@ public class LoginScreen extends AppCompatActivity {
     }
 
 
+    public void createUser(View view) {
+
+        Intent intent = new Intent(this, CreateUserPage.class);
+        startActivity(intent);
+    }
+
+
 }
 
 

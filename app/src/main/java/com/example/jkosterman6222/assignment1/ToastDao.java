@@ -18,7 +18,7 @@ public interface ToastDao {
    /* @Query("select * from user")
     public List<User> getAllToast();*/
 
-    @Query("select * from toast where id = :toastId")
+    @Query("select * from toast where id = :userId")
     public List<User> getToast(long userId);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)

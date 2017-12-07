@@ -32,7 +32,13 @@
         <activity
             android:name=".UserPreferences"
             android:label="Preferences" />
-        <activity android:name=".UserCreation"></activity>
+        <activity
+            android:name=".UserCreation"
+            android:label="Create User" />
+        <activity
+            android:name=".CreateUserPage"
+            android:label="Create New User" />
+
     </application>
 
 </manifest>
