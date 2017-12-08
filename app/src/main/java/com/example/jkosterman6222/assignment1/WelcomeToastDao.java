@@ -10,20 +10,20 @@ import java.util.List;
 
 
 @Dao
-public interface ToastDao {
+public interface WelcomeToastDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void addToast(User user);
+    void addWelcomeToast(WelcomeToast welcomeToast);
 
-   /* @Query("select * from user")
-    public List<User> getAllToast();*/
+   @Query("select * from welcomeToast")
+    public List<User> getAllWelcomeToast();
 
-    @Query("select * from toast where id = :userId")
-    public List<User> getToast(long userId);
+    @Query("select * from welcomeToast where id = :userId")
+    public List<User> getWelcomeToast(long userId);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    void updateToast(User user);
+    void updateWelcomeToast(User user);
 
-    @Query("delete from toast")
-    void removeAllToasts();
+    @Query("delete from welcomeToast")
+    void removeAllWelcomeToasts();
 }

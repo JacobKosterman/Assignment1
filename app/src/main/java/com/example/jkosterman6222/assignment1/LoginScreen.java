@@ -19,7 +19,9 @@ import java.util.List;
 
 public class LoginScreen extends AppCompatActivity {
     private User user;
+    private WelcomeToast welcomeToast;
     private AppDatabase database;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,21 +31,29 @@ public class LoginScreen extends AppCompatActivity {
 
         database = AppDatabase.getDatabase(getApplicationContext());
 
-        database.userDao().removeAllUsers();
+        //database.userDao().removeAllUsers();
         // add some data
         List<User> users = database.userDao().getAllUser();
-        if (users.size()==0) {
-            database.userDao().addUser(new User(1, "JacKos", "test"));
+        if (users.isEmpty()) {
+
+            database.preferencesDao().addPreferences(new Preferences(user.id, "test@email.com", Boolean.TRUE));
+
+            database.userDao().addUser(new User("JacKos", "Jacob", "Kosterman", "test@test.com","test"));
+            database.userDao().addUser(new User("Newman123", "Bob", "Newman", "test@test.com", "test"));
+            database.userDao().addUser(new User("Metzen", "Chris", "Metzen", "test@test.com", "test"));
+
+
+            database.welcomeToastDao().addWelcomeToast(new WelcomeToast("Welcome Toast", "Welcome"));
+
+            welcomeToastDao().getAllWelcomeToast().get(0);
+
             user = database.userDao().getAllUser().get(0);
-            Toast.makeText(this, String.valueOf(user.id), Toast.LENGTH_SHORT).show();
-            Preferences preferences = new Preferences(user.id, "test@email.com", Boolean.TRUE);
-            database.preferencesDao().addPreferences(preferences);
-            database.userDao().addUser(new User(2, "Newman", "test"));
-            database.userDao().addUser(new User(3, "Metzen", "test"));
+            Toast.makeText(this, String.valueOf(user.userName), Toast.LENGTH_SHORT).show();
+
         }
 
         try{
-            database.toastDao().getToast(1);
+            database.welcomeToastDao().getWelcomeToast(1);
         }
         catch (Exception e){
 
@@ -55,7 +65,7 @@ public class LoginScreen extends AppCompatActivity {
         List<User> user = database.userDao().getAllUser();
         List<Preferences> preferencesForUser = database.preferencesDao().findPreferencesForUser(user.get(0).id);
         //TextView textView = findViewById(R.id.result);
-        Toast.makeText(this, preferencesForUser.toString(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, preferencesForUser.toString(), Toast.LENGTH_SHORT).show();
        /* if (user.size()>0){
             textView.setText(user.get(0).name + " Skill points " + user.get(0).skillPoints + " Trophys " + trophiesForUser.size() );
         }*/
@@ -90,6 +100,38 @@ public class LoginScreen extends AppCompatActivity {
         EditText userName;
         EditText passWord;
 
+        userName = (EditText)findViewById(R.id.editText);
+        passWord = (EditText)findViewById(R.id.editText2);
+
+        String usernameCheck = userName.getText().toString();
+        String passwordCheck = passWord.getText().toString();
+
+        List<User> users = database.userDao().getUser(usernameCheck);
+
+        if( !users.isEmpty() && passwordCheck.equals(users.get(0).getPassword())){
+
+            Intent intent = new Intent(this, MainPage.class);
+            startActivity(intent);
+            finish();
+        }
+        else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Please fill out valid Username and Password");
+            builder.setTitle("Login Error");
+            AlertDialog dialog = builder.create();
+            builder.create().show();
+            userName.setText("");
+            passWord.setText("");
+        }
+    }
+
+
+
+    /*
+    public void authenticate(View view) {
+        EditText userName;
+        EditText passWord;
+
         String savedPassword = "12345";
         String savedUserName = "Max Power";
 
@@ -116,10 +158,10 @@ public class LoginScreen extends AppCompatActivity {
                 passWord.setText("");
 
             };
-
         }
     }
 
+*/
 
     public void createUser(View view) {
 

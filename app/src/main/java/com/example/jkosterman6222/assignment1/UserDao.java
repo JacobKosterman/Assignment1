@@ -20,8 +20,8 @@ public interface UserDao {
     @Query("select * from user")
     public List<User> getAllUser();
 
-    @Query("select * from user where id = :userId")
-    public List<User> getUser(long userId);
+    @Query("select * from user where userName = :userName")
+    public List<User> getUser(String userName);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void updateUser(User user);

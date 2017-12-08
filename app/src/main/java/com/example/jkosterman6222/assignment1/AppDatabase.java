@@ -9,14 +9,14 @@ import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 
-@Database(entities = {User.class, Preferences.class, Toast.class}, version = 16, exportSchema = false)
+@Database(entities = {User.class, Preferences.class, WelcomeToast.class}, version = 16, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
 
     public abstract UserDao userDao();
     public abstract PreferencesDao preferencesDao();
-    public abstract ToastDao toastDao();
+    public abstract WelcomeToastDao welcomeToastDao();
 
     public static AppDatabase getDatabase(Context context) {
         if (INSTANCE == null) {

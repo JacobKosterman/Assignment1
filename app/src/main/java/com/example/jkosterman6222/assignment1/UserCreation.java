@@ -1,11 +1,17 @@
 package com.example.jkosterman6222.assignment1;
 
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import java.util.List;
+
 public class UserCreation extends AppCompatActivity {
+
+    private AppDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,71 +25,67 @@ public class UserCreation extends AppCompatActivity {
 
     }
 
-    public void finalizeUser(View view){
+    /*public void finalizeUser(View view){
 
+        EditText EditUsername;
         EditText EditFirstName;
         EditText EditLastName;
         EditText EditEmailAddress;
         EditText EditPassword;
         EditText EditPasswordCheck;
 
+        String username = "";
         String firstName = "";
         String lastName = "";
         String emailAddress = "";
         String password = "";
-        String passwordCheck = "";
 
+        EditUsername = (EditText)findViewById(R.id.txtUserName);
         EditFirstName =  (EditText)findViewById(R.id.txtFirstName);
         EditLastName =  (EditText)findViewById(R.id.txtLastName);
         EditEmailAddress =  (EditText)findViewById(R.id.txtEmail);
         EditPassword = (EditText)findViewById(R.id.txtPass);
         EditPasswordCheck = (EditText)findViewById(R.id.txtPassCheck);
 
-        if(!userName.getText().toString().equals("") && !passWord.getText().toString().equals("")){
+        username = EditUsername.getText().toString();
+        firstName = EditFirstName.getText().toString();
+        lastName = EditLastName.getText().toString();
+        emailAddress = EditEmailAddress.getText().toString();
+        password = EditPassword.getText().toString();
 
 
+        if(!EditFirstName.getText().toString().equals("") && !EditLastName.getText().toString().equals("") && !EditUsername.getText().toString().equals("")
+                && !EditEmailAddress.getText().toString().equals("") && !EditPassword.getText().toString().equals("") && !EditPasswordCheck.getText().toString().equals("")){
 
+            if(EditFirstName.getText().toString().equals(EditLastName.getText())) {
 
-        }
+                //Put database code for adding user
+                List<User> users = database.userDao().getUser(username);
 
+                if(users.isEmpty()){
+                    database.userDao().addUser(new User(username, firstName, lastName, emailAddress, password));
 
-
-
-
-
-    }
-   /* public void authenticate(View view) {
-        EditText userName;
-        EditText passWord;
-
-        String savedPassword = "12345";
-        String savedUserName = "Max Power";
-
-        String errorString = "";
-
-        userName = (EditText)findViewById(R.id.editText);
-        passWord = (EditText)findViewById(R.id.editText2);
-
-
-        if(!userName.getText().toString().equals("") && !passWord.getText().toString().equals("")){
-
-            if (userName.getText().toString().toUpperCase().equals(savedUserName.toUpperCase()) && passWord.getText().toString().equals(savedPassword.toUpperCase())){
-
-                Intent intent = new Intent(this, MainPage.class);
-                startActivity(intent);
-
-            }else {
+                    Intent intent = new Intent(this, LoginScreen.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+            else{
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("Please fill out valid Username and Password");
-                builder.setTitle("Login Error");
+                builder.setMessage("Passwords do not match");
+                builder.setTitle("User Creation Error");
                 AlertDialog dialog = builder.create();
                 builder.create().show();
-                userName.setText("");
-                passWord.setText("");
+            }
+        }
+        else{
 
-            };
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Please Fill out all fields");
+            builder.setTitle("User Creation Error");
+            AlertDialog dialog = builder.create();
+            builder.create().show();
 
         }
     }*/
-
 }
