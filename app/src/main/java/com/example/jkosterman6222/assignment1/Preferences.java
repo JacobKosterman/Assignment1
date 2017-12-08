@@ -18,13 +18,13 @@ package com.example.jkosterman6222.assignment1;
 public class Preferences {
 
     @PrimaryKey(autoGenerate = true)
-    long id;
+    int id;
 
-    public long userId;
+    public int userId;
     String emailString;
     boolean pettyCash;
 
-    public Preferences(long userId, String emailString, Boolean pettyCash) {
+    public Preferences(int userId, String emailString, Boolean pettyCash) {
         this.userId = userId;
         this.emailString = emailString;
         this.pettyCash = pettyCash;

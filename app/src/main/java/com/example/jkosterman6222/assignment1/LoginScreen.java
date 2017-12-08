@@ -21,6 +21,7 @@ public class LoginScreen extends AppCompatActivity {
     private User user;
     private WelcomeToast welcomeToast;
     private AppDatabase database;
+    private String test;
 
 
     @Override
@@ -36,24 +37,28 @@ public class LoginScreen extends AppCompatActivity {
         List<User> users = database.userDao().getAllUser();
         if (users.isEmpty()) {
 
-            database.preferencesDao().addPreferences(new Preferences(user.id, "test@email.com", Boolean.TRUE));
-
             database.userDao().addUser(new User("JacKos", "Jacob", "Kosterman", "test@test.com","test"));
             database.userDao().addUser(new User("Newman123", "Bob", "Newman", "test@test.com", "test"));
-            database.userDao().addUser(new User("Metzen", "Chris", "Metzen", "test@test.com", "test"));
-
 
             database.welcomeToastDao().addWelcomeToast(new WelcomeToast("Welcome Toast", "Welcome"));
 
-            welcomeToastDao().getAllWelcomeToast().get(0);
+            //test = database.welcomeToastDao().getWelcomeToast(0).toString();
+            database.preferencesDao().addPreferences(new Preferences(1, "test@email.com", Boolean.TRUE));
 
-            user = database.userDao().getAllUser().get(0);
+
+
+            List<WelcomeToast> welcomeToasts = database.welcomeToastDao().getAllWelcomeToast();
+            test = welcomeToasts.get(0).comment.toString();
+            Toast.makeText(this, test, Toast.LENGTH_SHORT).show();
+
+
+            /*user = database.userDao().getAllUser().get(0);
             Toast.makeText(this, String.valueOf(user.userName), Toast.LENGTH_SHORT).show();
-
+*/
         }
 
         try{
-            database.welcomeToastDao().getWelcomeToast(1);
+            //database.welcomeToastDao().getWelcomeToast(1);
         }
         catch (Exception e){
 

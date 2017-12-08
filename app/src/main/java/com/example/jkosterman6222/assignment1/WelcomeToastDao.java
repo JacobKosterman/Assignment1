@@ -16,13 +16,13 @@ public interface WelcomeToastDao {
     void addWelcomeToast(WelcomeToast welcomeToast);
 
    @Query("select * from welcomeToast")
-    public List<User> getAllWelcomeToast();
+    public List<WelcomeToast> getAllWelcomeToast();
 
     @Query("select * from welcomeToast where id = :userId")
-    public List<User> getWelcomeToast(long userId);
+    public List<WelcomeToast> getWelcomeToast(long userId);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    void updateWelcomeToast(User user);
+    void updateWelcomeToast(WelcomeToast welcomeToast);
 
     @Query("delete from welcomeToast")
     void removeAllWelcomeToasts();
