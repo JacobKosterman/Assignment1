@@ -5,18 +5,25 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 public class MainPage extends AppCompatActivity {
 
-    public static final String PREFS = "examplePrefs";
+    public static final String CURRENTUSER = "currentUser";
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
 
+        TextView tv = (TextView)findViewById(R.id.txtTest);
 
+        SharedPreferences example = getSharedPreferences(CURRENTUSER, 0);
+
+        String userString = example.getString("currentUser", "Not Found");
+
+        tv.setText(userString);
 
 
     }
