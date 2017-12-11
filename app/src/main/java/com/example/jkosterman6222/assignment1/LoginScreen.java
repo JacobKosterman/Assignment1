@@ -1,16 +1,12 @@
 package com.example.jkosterman6222.assignment1;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.stetho.Stetho;
@@ -22,6 +18,9 @@ public class LoginScreen extends AppCompatActivity {
     private WelcomeToast welcomeToast;
     private AppDatabase database;
     private String test;
+    public static final String PREFS = "examplePrefs";
+
+
 
 
     @Override
@@ -33,7 +32,7 @@ public class LoginScreen extends AppCompatActivity {
         database = AppDatabase.getDatabase(getApplicationContext());
 
         //database.userDao().removeAllUsers();
-        // add some data
+
         List<User> users = database.userDao().getAllUser();
         if (users.isEmpty()) {
 
@@ -42,7 +41,7 @@ public class LoginScreen extends AppCompatActivity {
 
             database.welcomeToastDao().addWelcomeToast(new WelcomeToast("Welcome Toast", "Welcome"));
 
-            //test = database.welcomeToastDao().getWelcomeToast(0).toString();
+
             database.preferencesDao().addPreferences(new Preferences(1, "test@email.com", Boolean.TRUE));
 
 
@@ -50,17 +49,6 @@ public class LoginScreen extends AppCompatActivity {
             List<WelcomeToast> welcomeToasts = database.welcomeToastDao().getAllWelcomeToast();
             test = welcomeToasts.get(0).comment.toString();
             Toast.makeText(this, test, Toast.LENGTH_SHORT).show();
-
-
-            /*user = database.userDao().getAllUser().get(0);
-            Toast.makeText(this, String.valueOf(user.userName), Toast.LENGTH_SHORT).show();
-*/
-        }
-
-        try{
-            //database.welcomeToastDao().getWelcomeToast(1);
-        }
-        catch (Exception e){
 
         }
 
@@ -71,28 +59,9 @@ public class LoginScreen extends AppCompatActivity {
         List<Preferences> preferencesForUser = database.preferencesDao().findPreferencesForUser(user.get(0).id);
         //TextView textView = findViewById(R.id.result);
         //Toast.makeText(this, preferencesForUser.toString(), Toast.LENGTH_SHORT).show();
-       /* if (user.size()>0){
-            textView.setText(user.get(0).name + " Skill points " + user.get(0).skillPoints + " Trophys " + trophiesForUser.size() );
-        }*/
-    }
-
-    public void onClick(View view){
-        /*if (view.getId()==R.id.addtrophybutton) {
-            // TODO add trophy
-            // TODO call updatefirstUserData
-            Toast.makeText(this,String.valueOf(user.id), Toast.LENGTH_SHORT).show();
-           //database.trophyDao().addTrophy(trophy);
-        }
-        if (view.getId()==R.id.increaseskills ){
-            user.skillPoints++;
-            database.userDao().updateUser(user);
-            // TODO to skillpoints
-
-        }
-        // TODO call updatefirstUserData
-        //updateFirstUserData();*/
 
     }
+
     @Override
     protected void onDestroy() {
         AppDatabase.destroyInstance();
@@ -115,6 +84,14 @@ public class LoginScreen extends AppCompatActivity {
 
         if( !users.isEmpty() && passwordCheck.equals(users.get(0).getPassword())){
 
+
+            int userId = users.get(0).id;
+
+            SharedPreferences mSettings = getSharedPreferences("Settings", 0);
+            SharedPreferences.Editor editor = mSettings.edit();
+            editor.putInt("currentUser", userId);
+            editor.commit();
+
             Intent intent = new Intent(this, MainPage.class);
             startActivity(intent);
             finish();
@@ -130,50 +107,11 @@ public class LoginScreen extends AppCompatActivity {
         }
     }
 
-
-
-    /*
-    public void authenticate(View view) {
-        EditText userName;
-        EditText passWord;
-
-        String savedPassword = "12345";
-        String savedUserName = "Max Power";
-
-        String errorString = "";
-
-        userName = (EditText)findViewById(R.id.editText);
-        passWord = (EditText)findViewById(R.id.editText2);
-
-
-        if(!userName.getText().toString().equals("") && !passWord.getText().toString().equals("")){
-
-            if (userName.getText().toString().toUpperCase().equals(savedUserName.toUpperCase()) && passWord.getText().toString().equals(savedPassword.toUpperCase())){
-
-                Intent intent = new Intent(this, MainPage.class);
-                startActivity(intent);
-
-            }else {
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("Please fill out valid Username and Password");
-                builder.setTitle("Login Error");
-                AlertDialog dialog = builder.create();
-                builder.create().show();
-                userName.setText("");
-                passWord.setText("");
-
-            };
-        }
-    }
-
-*/
-
     public void createUser(View view) {
 
         Intent intent = new Intent(this, CreateUserPage.class);
         startActivity(intent);
     }
-
 
 }
 

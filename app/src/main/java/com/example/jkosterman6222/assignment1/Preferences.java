@@ -24,7 +24,7 @@ public class Preferences {
     String emailString;
     boolean pettyCash;
 
-    public Preferences(int userId, String emailString, Boolean pettyCash) {
+    public Preferences(int userId, String emailString, boolean pettyCash) {
         this.userId = userId;
         this.emailString = emailString;
         this.pettyCash = pettyCash;
