@@ -20,10 +20,7 @@ public class LoginScreen extends AppCompatActivity {
     private WelcomeToast welcomeToast;
     private AppDatabase database;
     private String test;
-    //public static final String CURRENTUSER = "currentUser";
-
-
-
+    public static final String CURRENTUSER = "myPreferencesFile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +55,7 @@ public class LoginScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                SharedPreferences preferences = getSharedPreferences("CURRENTUSER", 0);
+                //SharedPreferences preferences = getSharedPreferences("CURRENTUSER", 0);
                 /*SharedPreferences.Editor editor = preferences.edit();
                 //editor.putInt("user", )*/
 
@@ -82,7 +79,10 @@ public class LoginScreen extends AppCompatActivity {
                         editor.putString("currentUser", userId);
                         editor.commit();
 
+
+
                         Intent intent = new Intent(getApplicationContext(), MainPage.class);
+                        //intent.putExtra("CURRENT_USER", userId);
                         startActivity(intent);
                         //finish();
                     }
