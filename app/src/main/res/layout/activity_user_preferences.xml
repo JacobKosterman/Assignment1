@@ -8,10 +8,10 @@
 
 
     <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="334dp"
-        android:layout_height="155dp"
+        android:layout_height="0dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -30,7 +30,6 @@
             android:id="@+id/radioReceipt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
             android:onClick="ShowEmail"
             android:text="Receipt Tracking"
             tools:layout_editor_absoluteX="16dp"
@@ -55,5 +54,19 @@
             android:visibility="invisible" />
 
     </RadioGroup>
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="223dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:onClick="SaveChanges"
+        android:text="Save Changes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:layout_constraintVertical_bias="0.1" />
 
 </android.support.constraint.ConstraintLayout>

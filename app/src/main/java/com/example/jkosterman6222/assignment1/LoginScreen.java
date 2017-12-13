@@ -20,7 +20,7 @@ public class LoginScreen extends AppCompatActivity {
     private WelcomeToast welcomeToast;
     private AppDatabase database;
     private String test;
-    public static final String CURRENTUSER = "myPreferencesFile";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,17 +37,20 @@ public class LoginScreen extends AppCompatActivity {
 
             //Some Dummy Data
             database.userDao().addUser(new User("JacKos", "Jacob", "Kosterman", "test@test.com","test"));
-            database.userDao().addUser(new User("Newman123", "Bob", "Newman", "test@test.com", "test"));
-            database.welcomeToastDao().addWelcomeToast(new WelcomeToast("Welcome Toast", "Welcome"));
+            database.userDao().addUser(new User("Newman", "Bob", "Newman", "test@test.com", "test"));
+            database.welcomeToastDao().addWelcomeToast(new WelcomeToast("Morning Toast", "Good Morning"));
+            database.welcomeToastDao().addWelcomeToast(new WelcomeToast("Afternoon Toast", "Good Afternoon"));
+            database.welcomeToastDao().addWelcomeToast(new WelcomeToast("Evening Toast", "Good Evening"));
+            database.welcomeToastDao().addWelcomeToast(new WelcomeToast("Late Toast", "Go to bed!"));
             database.preferencesDao().addPreferences(new Preferences(1, "test@email.com", Boolean.TRUE));
+            database.preferencesDao().addPreferences(new Preferences(2, "test@test.com", Boolean.FALSE));
         }
 
         List<WelcomeToast> welcomeToasts = database.welcomeToastDao().getAllWelcomeToast();
-        test = welcomeToasts.get(0).comment.toString();
+        test = welcomeToasts.get(1).comment.toString();
         Toast.makeText(this, test, Toast.LENGTH_SHORT).show();
 
-
-        Button btnLogin = (Button)findViewById(R.id.buttonLogin);
+        Button btnLogin = findViewById(R.id.buttonLogin);
 
         btnLogin.setOnClickListener(new View.OnClickListener(){
 
@@ -55,16 +58,11 @@ public class LoginScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //SharedPreferences preferences = getSharedPreferences("CURRENTUSER", 0);
-                /*SharedPreferences.Editor editor = preferences.edit();
-                //editor.putInt("user", )*/
-
-
                     EditText userName;
                     EditText passWord;
 
-                    userName = (EditText)findViewById(R.id.editText);
-                    passWord = (EditText)findViewById(R.id.editText2);
+                    userName = findViewById(R.id.editText);
+                    passWord = findViewById(R.id.editText2);
 
                     String usernameCheck = userName.getText().toString();
                     String passwordCheck = passWord.getText().toString();
@@ -73,16 +71,9 @@ public class LoginScreen extends AppCompatActivity {
 
                     if( !users.isEmpty() && passwordCheck.equals(users.get(0).getPassword())){
 
-                        String userId = users.get(0).userName;
-                        SharedPreferences userPreferences = getSharedPreferences("CURRENTUSER", 0);
-                        SharedPreferences.Editor editor = userPreferences.edit();
-                        editor.putString("currentUser", userId);
-                        editor.commit();
-
-
-
+                                               String userId = users.get(0).userName;
                         Intent intent = new Intent(getApplicationContext(), MainPage.class);
-                        //intent.putExtra("CURRENT_USER", userId);
+                        intent.putExtra("CURRENT_USER", userId);
                         startActivity(intent);
                         //finish();
                     }
@@ -99,62 +90,14 @@ public class LoginScreen extends AppCompatActivity {
                 }
 
         });
-
-
     }
-    /*private void updateFirstUserData() {
-        List<User> user = database.userDao().getAllUser();
-        List<Preferences> preferencesForUser = database.preferencesDao().findPreferencesForUser(user.get(0).id);
-        //TextView textView = findViewById(R.id.result);
-        //Toast.makeText(this, preferencesForUser.toString(), Toast.LENGTH_SHORT).show();
- }
-*/
 
-@Override
+    @Override
     protected void onDestroy() {
         AppDatabase.destroyInstance();
         super.onDestroy();
     }
 
-
-    //Authenticate is dated and will be removed
-   /* public void authenticate(View view) {
-        EditText userName;
-        EditText passWord;
-
-        userName = (EditText)findViewById(R.id.editText);
-        passWord = (EditText)findViewById(R.id.editText2);
-
-        String usernameCheck = userName.getText().toString();
-        String passwordCheck = passWord.getText().toString();
-
-        List<User> users = database.userDao().getUser(usernameCheck);
-
-        if( !users.isEmpty() && passwordCheck.equals(users.get(0).getPassword())){
-
-
-            int userId = users.get(0).id;
-
-            SharedPreferences mSettings = getSharedPreferences("Settings", 0);
-            SharedPreferences.Editor editor = mSettings.edit();
-            editor.putInt("currentUser", userId);
-            editor.commit();
-
-            Intent intent = new Intent(this, MainPage.class);
-            startActivity(intent);
-            finish();
-        }
-        else {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Please fill out valid Username and Password");
-            builder.setTitle("Login Error");
-            AlertDialog dialog = builder.create();
-            builder.create().show();
-            userName.setText("");
-            passWord.setText("");
-        }
-    }
-*/
     public void createUser(View view) {
 
         Intent intent = new Intent(this, CreateUserPage.class);

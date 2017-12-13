@@ -23,6 +23,9 @@ public interface UserDao {
     @Query("select * from user where userName = :userName")
     public List<User> getUser(String userName);
 
+    @Query("select * from user where id = :userID")
+    public List<User> getUserByID(Integer userID);
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void updateUser(User user);
 
