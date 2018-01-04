@@ -21,10 +21,6 @@ public class MainPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
 
-        /*TextView tv = (TextView)findViewById(R.id.txtTest);
-        SharedPreferences example = getSharedPreferences(CURRENTUSER, 0);
-        String userString = example.getString("currentUser", "Not Found");
-        tv.setText(userString);*/
 
         TextView tv = findViewById(R.id.txtTest);
         String userString = getIntent().getStringExtra("CURRENT_USER");
@@ -32,20 +28,6 @@ public class MainPage extends AppCompatActivity {
         CurrentUser = userString;
 
     }
-
-   /* @Override
-    public void onBackPressed() {
-        setContentView(R.layout.activity_main_page);
-
-        TextView tv = (TextView)findViewById(R.id.txtTest);
-        //SharedPreferences example = getSharedPreferences(CURRENTUSER, 0);
-        //String userString = example.getString("currentUser", "Not Found");
-
-
-        String s = getIntent().getStringExtra("CURRENT_USER");
-        tv.setText(s);
-
-    }*/
 
 
     public void TakePicture(View view) {
