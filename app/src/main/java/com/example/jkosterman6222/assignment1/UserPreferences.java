@@ -1,9 +1,13 @@
 package com.example.jkosterman6222.assignment1;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -14,6 +18,7 @@ public class UserPreferences extends AppCompatActivity {
 
     public String CurrentUser = "";
     private AppDatabase database;
+
 
 
     @Override
@@ -57,6 +62,7 @@ public class UserPreferences extends AppCompatActivity {
             }
         }
         CurrentUser = userString;
+
     }
 
     public void SaveChanges(View view){
@@ -122,6 +128,33 @@ public class UserPreferences extends AppCompatActivity {
         }
     }
 
+    public void btnSMSClick(View v){
+
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_APP_MESSAGING);
+        startActivity(intent);
+
+    }
+
+
+    public void btnChromeStart(View v){
+
+        String url = "http://www.example.com";
+        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.setPackage("com.android.chrome");
+        try {
+            startActivity(i);
+        } catch (ActivityNotFoundException e) {
+            // Chrome is probably not installed
+            // Try with the default browser
+            i.setPackage(null);
+            startActivity(i);
+        }
+
+    }
+
+
     public void ShowEmail(View view){
 
         boolean checked = ((RadioButton) view).isChecked();
@@ -140,4 +173,6 @@ public class UserPreferences extends AppCompatActivity {
                     break;
         }
     }
+
+
 }

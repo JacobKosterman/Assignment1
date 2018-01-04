@@ -7,11 +7,58 @@
     tools:context="com.example.jkosterman6222.assignment1.UserPreferences">
 
 
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="223dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:onClick="SaveChanges"
+        android:text="Save Changes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:layout_constraintVertical_bias="0.1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <Button
+        android:id="@+id/btnSMS"
+        android:layout_width="148dp"
+        android:layout_height="48dp"
+        android:text="SMS"
+        android:onClick="btnSMSClick"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_constraintTop_creator="1"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="386dp" />
+
+    <Button
+        android:id="@+id/btnInternet"
+        android:layout_width="151dp"
+        android:layout_height="48dp"
+        android:onClick="btnChromeStart"
+        android:text="Chrome"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="134dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="334dp"
         android:layout_height="0dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -54,19 +101,5 @@
             android:visibility="invisible" />
 
     </RadioGroup>
-
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="223dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:onClick="SaveChanges"
-        android:text="Save Changes"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        app:layout_constraintVertical_bias="0.1" />
 
 </android.support.constraint.ConstraintLayout>
