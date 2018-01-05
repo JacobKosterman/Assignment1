@@ -15,7 +15,6 @@ public class MainPage extends AppCompatActivity {
     public String CurrentUser = "";
     private AppDatabase database;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,17 +28,20 @@ public class MainPage extends AppCompatActivity {
 
     }
 
+    public void btnAddToast(View view){
+
+            Intent intent = new Intent(this, ToastActivity.class);
+            startActivity(intent);
+    }
 
     public void TakePicture(View view) {
 
             Intent intent = new Intent(this, ImagePreviewPage.class);
             startActivity(intent);
-
         }
 
 
     public void UserPreferences(View view) {
-
 
             Intent intent = new Intent(this, UserPreferences.class);
             intent.putExtra("CURRENT_USER", CurrentUser);
